@@ -1,0 +1,134 @@
+﻿@model IEnumerable<QLLaCoffee.Models.BillInfos>
+
+@{
+    ViewBag.Title = "Chi tiết hóa đơn";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    h1, h2, p {
+        text-align: center;
+    }
+
+    .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        font-size: 16px;
+        line-height: 24px;
+        color: #555;
+    }
+
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+            .invoice-box table td {
+                padding: 5px;
+                vertical-align: top;
+            }
+
+            .invoice-box table tr td:nth-child(2) {
+                text-align: right;
+            }
+
+            .invoice-box table tr.top table td {
+                padding-bottom: 20px;
+            }
+
+            .invoice-box table tr.heading td {
+                background: #eee;
+                border-bottom: 1px solid #ddd;
+                font-weight: bold;
+            }
+
+            .invoice-box table tr.item td {
+                border-bottom: 1px solid #eee;
+            }
+
+            .invoice-box table tr.item.last td {
+                border-bottom: none;
+            }
+</style>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-2">
+            <p class="card-title">Chi tiết hóa đơn</p>
+            <div>
+                <a class="btn btn-info mr-2" id="btnExportPDF" href="#">
+                    <i class="ti-printer"></i>
+                </a>
+                <a href="@Url.Action("Index", "Bills")" class="btn btn-primary">
+                    <i class="ti-arrow-left"></i>
+                </a>
+            </div>
+        </div>
+        <p>Mã hóa đơn: @Model.FirstOrDefault().BillID</p>
+        <p>Ngày lập hóa đơn: @Model.FirstOrDefault().Bills.CreateDate.ToString("g")</p>
+        @{
+            var user = QLLaCoffee.App_Start.SessionConfig.GetUser();
+        }
+        <p>Nhân viên: @user.FullName</p>
+        <div class="invoice-box">
+            <table>
+                <tr class="heading">
+                    <td>
+                        Tên đồ uống
+                    </td>
+                    <td>
+                        Số lượng
+                    </td>
+                    <td>
+                        Giá
+                    </td>
+                    <td>
+                        Thành tiền
+                    </td>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr class="item">
+                        <td>
+                            @item.Drinks.DrinkName
+                        </td>
+                        <td>
+                            @item.DrinkCount
+                        </td>
+                        <td>
+                            @item.Drinks.DrinkPrice.ToString("C0")
+                        </td>
+                        <td>
+                            @item.DrinkPrice.ToString("C0")
+                        </td>
+                    </tr>
+                }
+                <tr class="total">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="font-size: 25px; padding-top: 20px">
+                        Tổng cộng: @Model.Sum(x => x.DrinkCount * x.Drinks.DrinkPrice).ToString("C0")
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#btnExportPDF').on('click', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/Bills/ExportPDF',
+                    type: 'GET',
+                    success: function (rs) {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+}

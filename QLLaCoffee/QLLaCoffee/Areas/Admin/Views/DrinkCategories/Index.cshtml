@@ -1,0 +1,202 @@
+﻿@model IEnumerable<QLLaCoffee.Models.DrinkCategories>
+
+@{
+    ViewBag.Title = "Danh sách loại đồ uống";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var count = 1;
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-2">
+            <p class="card-title">Danh sách loại đồ uống</p>
+            <div>
+                <button class="btn btn-danger" id="btnDeleteAll">
+                    <i class="ti-trash"></i>
+                </button>
+                <a href="@Url.Action("Create", "DrinkCategories")" class="btn btn-success ml-2">
+                    <i class="ti-plus"></i>
+                </a>
+            </div>
+        </div>
+
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+            <div class="d-flex align-items-center mb-2 w-75">
+                <label>Loại đồ uống:</label>
+                <input class="form-control w-50 ml-2" type="text" placeholder="Tên loại đồ uống" name="drinkCategoryName" value="@ViewBag.DrinkCategoryName">
+                <button class="btn btn-info ml-2" type="submit">
+                    Tìm kiếm
+                </button>
+                <a href="@Url.Action("Index", "DrinkCategories")" class="btn btn-secondary ml-2">
+                    <i class="mdi mdi-autorenew"></i>
+                </a>
+            </div>
+        }
+
+        <div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr style="background-color: dodgerblue; color: white;">
+                        <th>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" id="SelectAll">
+                                </label>
+                            </div>
+                        </th>
+                        <th style="vertical-align: middle;">#</th>
+                        <th style="vertical-align: middle;">
+                            @Html.DisplayNameFor(model => model.DrinkCategoryName)
+                        </th>
+                        <th style="vertical-align: middle;">
+                            @Html.DisplayNameFor(model => model.DrinkCategoryDesciption)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center">Không có dữ liệu</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                <tr>
+                    <td>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input cbkItem" value="@item.DrinkCategoryID">
+                            </label>
+                        </div>
+                    </td>
+                    <td>@(count++)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrinkCategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrinkCategoryDesciption)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "DrinkCategories", new { id = item.DrinkCategoryID })" style="text-decoration: none; margin-right: 20px">
+                            <i class="mdi mdi-pencil" style="font-size: 25px; color: dodgerblue;"></i>
+                        </a>
+                        <a href="" style="text-decoration: none" class="btnDelete">
+                            <i class="mdi mdi-delete" style="font-size: 25px; color: red"></i>
+                        </a>
+                    </td>
+                </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        function checkDeleteButtonVisibility() {
+            var anyChecked = $('.cbkItem:checked').length > 0 || $('#SelectAll').prop('checked');;
+            $('#btnDeleteAll').toggle(anyChecked);
+        }
+        $(document).ready(function () {
+            checkDeleteButtonVisibility();
+            $('body').on('change', '.cbkItem', function () {
+                checkDeleteButtonVisibility();
+            });
+            $('body').on('click', '#btnDeleteAll', function (e) {
+                e.preventDefault()
+                var str = "";
+                var checkbox = $(this).parents('.card-body').find('td input:checkbox');
+                var i = 0;
+                checkbox.each(function () {
+                    if (this.checked) {
+                        checkbox.attr('selected', 'checked');
+                        var _id = $(this).val();
+                        if (i == 0) {
+                            str += _id;
+                        } else {
+                            str += "," + _id;
+                        }
+                        i++
+                    } else {
+                        checkbox.attr('selected', '');
+                    }
+                });
+                if (str.length > 0) {
+                    Swal.fire({
+                        title: 'Bạn có chắc chắn muốn xóa các bản ghi này? (Xóa các bản ghi này sẽ xóa các bản ghi liên quan từ các bảng khác)',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Xóa',
+                        cancelButtonText: 'Hủy',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '/DrinkCategories/DeleteAll',
+                                type: 'POST',
+                                data: { ids: str },
+                                success: function (rs) {
+                                    if (rs.success) {
+                                        location.reload();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+            $('body').on('change', '#SelectAll', function () {
+                var checkStatus = this.checked;
+                var checkbox = $(this).parents('.card-body').find('td input:checkbox');
+                checkbox.each(function () {
+                    this.checked = checkStatus;
+                    if (this.checked) {
+                        checkbox.attr('selected', 'checked');
+                        checkDeleteButtonVisibility();
+                    } else {
+                        checkbox.attr('selected', '');
+                        checkDeleteButtonVisibility();
+                    }
+                });
+            });
+            // Sự kiện khi nhấn vào biểu tượng rác của từng bản ghi
+            $('body').on('click', '.btnDelete', function (e) {
+                e.preventDefault();
+                var itemId = $(this).closest('tr').find('.cbkItem').val();
+                Swal.fire({
+                    title: 'Bạn có chắc chắn muốn xóa bản ghi này? (Xóa bản ghi này sẽ xóa các bản ghi liên quan từ các bảng khác)',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Xóa',
+                    cancelButtonText: 'Hủy',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/DrinkCategories/Delete', // Đường dẫn đến action xóa của controller của bạn
+                            type: 'POST', // Hoặc 'GET' tùy thuộc vào cách bạn đã cấu hình controller của mình
+                            data: { id: itemId },
+                            success: function (rs) {
+                                if (rs.success) {
+                                    location.reload();
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+
+
+
+

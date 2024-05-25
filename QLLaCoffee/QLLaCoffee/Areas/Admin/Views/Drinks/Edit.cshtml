@@ -1,0 +1,80 @@
+﻿@model QLLaCoffee.Models.Drinks
+
+@{
+    ViewBag.Title = "Chỉnh sửa đồ uống";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Drinks", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <p class="card-title">Chỉnh sửa đồ uống</p>
+                <a href="@Url.Action("Index", "Drinks")" class="btn btn-primary">
+                    <i class="ti-arrow-left"></i>
+                </a>
+            </div>
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.DrinkID)
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Tên loại đồ uống<span class="text-danger"> (*)</span></label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("DrinkCategoryID", null, htmlAttributes: new { @class = "form-control js-example-basic-single" })
+                                @Html.ValidationMessageFor(model => model.DrinkCategoryID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Tên đồ uống<span class="text-danger"> (*)</span></label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DrinkName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DrinkName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Hình ảnh<span class="text-danger"> (*)</span></label>
+                            <div class="col-md-10">
+                                <input type="file" name="img" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <input type="text" class="form-control file-upload-info" disabled placeholder="Tải hình ảnh">
+                                    <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-secondary" type="button">Tải lên</button>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.DrinkImage, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Giá bán<span class="text-danger"> (*)</span></label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DrinkPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DrinkPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-info btn-icon-text"><i class="ti-file btn-icon-prepend"></i>Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+}
+
+

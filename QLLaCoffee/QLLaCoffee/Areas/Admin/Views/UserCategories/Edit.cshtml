@@ -1,0 +1,47 @@
+﻿@model QLLaCoffee.Models.UserCategories
+
+@{
+    ViewBag.Title = "Chỉnh sửa loại người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UserCategoryID)
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <p class="card-title">Chỉnh sửa loại người dùng</p>
+                <a href="@Url.Action("Index", "UserCategories")" class="btn btn-primary">
+                    <i class="ti-arrow-left"></i>
+                </a>
+            </div>
+            <div class="table-responsive">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-labe col-md-12">Tên loại người dùng<span class="text-danger"> (*)</span></label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.UserCategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserCategoryName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-labe col-md-12">Mô tả</label>
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.UserCategoryDescription, new { @class = "form-control", @rows = "4" })
+                            @Html.ValidationMessageFor(model => model.UserCategoryDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-info btn-icon-text"><i class="ti-file btn-icon-prepend"></i>Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

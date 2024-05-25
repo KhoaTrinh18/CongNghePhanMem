@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title</title>
+    <link href="https://cdn.materialdesignicons.com/6.5.95/css/materialdesignicons.min.css" rel="stylesheet">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Public/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/Public/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Public/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/Public/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="~/Public/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/Public/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="~/Public/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/Public/js/select.dataTables.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/Public/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/Public/images/favicon.png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <div class="navbar-brand brand-logo h-100"><img src="~/Public/images/logo.png" alt="logo" class="h-100" /></div>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end" style="background-color: dodgerblue; color: white">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+                @{
+                    var user = QLLaCoffee.App_Start.SessionConfig.GetUser();
+                }
+                @if (user != null)
+                {
+                    <ul class="navbar-nav navbar-nav-right">
+                        <li class="nav-item">
+                            @user.FullName
+                        </li>
+                        <li class="nav-item nav-profile dropdown">
+                            @if (user.UserImage != null)
+                            {
+                                <img src="~/Public/images/users/@user.UserImage" alt="profile" />
+
+                            }
+                            else
+                            {
+                                <img src="~/Public/images/avatar.jpg" alt="profile" />
+                            }
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-danger" href="@Url.Action("Logout", "Login", new { area = "" })">Đăng xuất</a>
+                        </li>
+                    </ul>
+                }
+
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_settings-panel.html -->
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas position-fixed" id="sidebar">
+                <ul class="nav">
+                    @if (user.UserCategories.UserCategoryName == "Quản lý" || user.UserCategories.UserCategoryName == "Thu ngân")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Sell")">
+                                <i class="mdi mdi-store menu-icon"></i>
+                                <span class="menu-title">Bán hàng</span>
+                            </a>
+                        </li>
+                    }
+                    @if (user.UserCategories.UserCategoryName == "Quản lý")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#douong" aria-expanded="false" aria-controls="douong">
+                                <i class="mdi mdi-food-fork-drink menu-icon"></i>
+                                <span class="menu-title">Đồ uống</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="douong">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "Drinks")">Đồ uống</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "DrinkCategories")">Loại đồ uống</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (user.UserCategories.UserCategoryName == "Quản lý" || user.UserCategories.UserCategoryName == "Quản lý kho")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#mathang" aria-expanded="false" aria-controls="mathang">
+                                <i class="mdi mdi-dropbox menu-icon"></i>
+                                <span class="menu-title">Mặt hàng</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="mathang">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "Goods")">Mặt hàng</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "GoodsCategories")">Loại mặt hàng</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (user.UserCategories.UserCategoryName == "Quản lý" || user.UserCategories.UserCategoryName == "Thu ngân")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Bills")">
+                                <i class="mdi mdi-clipboard-text menu-icon"></i>
+                                <span class="menu-title">Hóa đơn</span>
+                            </a>
+                        </li>
+                    }
+                    @if (user.UserCategories.UserCategoryName == "Thu ngân")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "ShiftReports")">
+                                <i class="mdi mdi-clipboard-text menu-icon"></i>
+                                <span class="menu-title">Báo cáo kết ca</span>
+                            </a>
+                        </li>
+                    }
+                    @if (user.UserCategories.UserCategoryName == "Quản lý")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#nguoidung" aria-expanded="false" aria-controls="nguoidung">
+                                <i class="mdi mdi-account menu-icon"></i>
+                                <span class="menu-title">Người dùng</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="nguoidung">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "Users")">Người dùng</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("Index", "UserCategories")">Loại người dùng</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Authorizations")">
+                                <i class="mdi mdi-shield menu-icon"></i>
+                                <span class="menu-title">Phân quyền</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel position-absolute h-100" style="right: 0">
+                <div class="content-wrapper">
+                    @RenderBody()
+                    <!-- main-panel ends -->
+                </div>
+                <!-- page-body-wrapper ends -->
+            </div>
+        </div>
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/Public/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="~/Public/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/Public/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="~/Public/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script src="~/Public/js/dataTables.select.min.js"></script>
+    <script src="~/Public/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+    <script src="~/Public/vendors/select2/select2.min.js"></script>
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/Public/js/off-canvas.js"></script>
+    <script src="~/Public/js/hoverable-collapse.js"></script>
+    <script src="~/Public/js/template.js"></script>
+    <script src="~/Public/js/settings.js"></script>
+    <script src="~/Public/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="~/Public/js/file-upload.js"></script>
+    <script src="~/Public/js/dashboard.js"></script>
+    <script src="~/Public/js/Chart.roundedBarCharts.js"></script>
+    <script src="~/Public/js/typeahead.js"></script>
+    <script src="~/Public/js/select2.js"></script>
+    <!-- End custom js for this page-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    @RenderSection("Scripts", false)
+</body>
+
+</html>
+
+
+
+

@@ -1,0 +1,80 @@
+﻿@model QLLaCoffee.Models.Goods
+
+@{
+    ViewBag.Title = "Chỉnh sửa mặt hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <p class="card-title">Chỉnh sửa mặt hàng</p>
+                <a href="@Url.Action("Index", "Goods")" class="btn btn-primary">
+                    <i class="ti-arrow-left"></i>
+                </a>
+            </div>
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.GoodsID)
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Tên loại mặt hàng<span class="text-danger"> (*)</span></label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("GoodsCategoryID", null, "Tên loại mặt hàng", htmlAttributes: new { @class = "form-control js-example-basic-single" })
+                                @Html.ValidationMessageFor(model => model.GoodsCategoryID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Tên mặt hàng<span class="text-danger"> (*)</span></label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.GoodsName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.GoodsName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Giá nhập<span class="text-danger"> (*)</span></label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.GoodsPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.GoodsPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Đơn vị<span class="text-danger"> (*)</span></label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.GoodsUnit, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.GoodsUnit, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Số lượng<span class="text-danger"> (*)</span></label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.GoodsCount, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.GoodsCount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-info btn-icon-text"><i class="ti-file btn-icon-prepend"></i>Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+}

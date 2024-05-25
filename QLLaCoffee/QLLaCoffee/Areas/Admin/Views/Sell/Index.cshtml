@@ -1,0 +1,146 @@
+﻿@model IEnumerable<QLLaCoffee.Models.Tables>
+
+@{
+    QLLaCoffee.Models.LaCoffeeDBContext db = new QLLaCoffee.Models.LaCoffeeDBContext();
+    ViewBag.Title = "Danh sách bàn";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var user = QLLaCoffee.App_Start.SessionConfig.GetUser();
+}
+
+<style>
+    .square-card {
+        width: 100%;
+        padding-top: 100%;
+    }
+
+    .square-card-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+@if (user.UserCategories.UserCategoryName == "Thu ngân")
+{
+    <!-- Modal -->
+    <div class="modal fade" id="amountModal" tabindex="-1" role="dialog" aria-labelledby="amountModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="amountModalLabel">Nhập số tiền đầu ca</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="amountForm" method="post" action="@Url.Action("StartShift", "Sell")">
+                        <div class="form-group">
+                            <label for="firstAmount">Số tiền đầu ca:</label>
+                            <input type="text" class="form-control" id="firstAmount" name="firstAmount">
+                            <div class="invalid-feedback" id="amountError">Vui lòng nhập số tiền hợp lệ.</div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-primary mr-3" onclick="submitAmount()">Xác nhận</button>
+                            <a type="button" class="btn btn-danger" href="@Url.Action("Login", "Login", new { area = ""})">Hủy</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@if (user.UserCategories.UserCategoryName == "Quản lý")
+{
+    <form id="tableForm" method="post" action="@Url.Action("ChangeTableCount", "Sell")">
+        <div class="d-flex mb-4 align-items-center">
+            <div class="d-flex align-items-center mr-3 w-50">
+                <label class="w-25">Số bàn tối đa:</label>
+                <input class="form-control" type="text" placeholder="Số bàn tối đa" name="tableCount">
+            </div>
+            <button class="btn btn-info btn-icon-text" id="saveButton" type="button"><i class="ti-file btn-icon-prepend"></i>Lưu</button>
+        </div>
+    </form>
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        if (item.Status == true)
+        {
+            ViewBag.Slot = "Có người";
+            ViewBag.color = "bg-success";
+        }
+        else
+        {
+            ViewBag.color = "bg-info";
+            ViewBag.slot = "Trống";
+        }
+        <div class="col-2 mb-3">
+            <a class="btn square-card card @ViewBag.color text-white" href="@Url.Action("Order", "Sell", new {id = item.TableID})">
+                <div class="card-body square-card-content">
+                    <p style="font-size: 30px">@item.TableName</p>
+                    <p>@ViewBag.slot</p>
+                    @if (item.Status == true && item.Bills.Any())
+                    {
+                        <p>@item.Bills.FirstOrDefault().TotalAmount.ToString("C0")</p>
+                    }
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+@{
+    var check = db.Tables.Count(t => t.Status == true);
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            // Kiểm tra nếu cần hiển thị modal
+            var urlParams = new URLSearchParams(window.location.search);
+            var showAmountModal = urlParams.get('showAmountModal');
+            if (showAmountModal === "True") { // Sửa thành "true"
+                $('#amountModal').modal('show');
+            }
+
+            $('#amountModal').on('hide.bs.modal', function (e) {
+                if (document.getElementById("firstAmount").classList.contains("is-invalid")) {
+                    e.preventDefault(); // Ngăn không cho đóng modal nếu có lỗi
+                }
+            });
+        });
+
+        function submitAmount() {
+            var amountStr = document.getElementById("firstAmount").value;
+            var amount = parseFloat(amountStr.replace(",", ".")); // Chuyển đổi giá trị sang decimal
+            if (isNaN(amount) || amountStr.trim() === "" || amount <= 0) {
+                document.getElementById("firstAmount").classList.add("is-invalid");
+            } else {
+                document.getElementById("firstAmount").classList.remove("is-invalid");
+                document.getElementById('amountForm').submit();
+                $('#amountModal').modal('hide'); // Ẩn modal sau khi xử lý
+            }
+        }
+
+        document.getElementById('saveButton').addEventListener('click', function() {
+            if (@check > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không thực hiện được',
+                    text: 'Có bàn đang hoạt động',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                document.getElementById('tableForm').submit();
+            }
+        });
+    </script>
+}

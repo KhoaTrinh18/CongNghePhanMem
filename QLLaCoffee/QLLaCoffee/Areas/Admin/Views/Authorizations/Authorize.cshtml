@@ -1,0 +1,92 @@
+﻿@model QLLaCoffee.Models.UserCategories
+
+@{
+    ViewBag.Title = "Phân quyền từng loại người dùng";
+    QLLaCoffee.Models.LaCoffeeDBContext db = new QLLaCoffee.Models.LaCoffeeDBContext();
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .list-group-item {
+        border: none;
+        padding: 10px 15px;
+        background-color: #f8f9fa;
+    }
+
+        .list-group-item:nth-child(odd) {
+            background-color: #e9ecef;
+        }
+
+    .form-check-label {
+        margin-left: 10px;
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-2">
+            <h5 class="card-title">Phân quyền từng loại người dùng</h5>
+            <a href="@Url.Action("Index", "Authorizations")" class="btn btn-primary">
+                <i class="ti-arrow-left"></i>
+            </a>
+        </div>
+        <ul class="list-group mb-3">
+            <li class="list-group-item">
+                <strong>Tên loại người dùng:</strong> @Model.UserCategoryName
+            </li>
+            <li class="list-group-item">
+                <strong>Mô tả:</strong> @Model.UserCategoryDescription
+            </li>
+        </ul>
+        <hr />
+        <form asp-action="UpdatePermissions" method="post">
+            @Html.HiddenFor(model => model.UserCategoryID)
+            <div class="row">
+                @foreach (var group in db.Functions.GroupBy(f => f.FunctionGroup).ToList())
+                {
+                    <div class="col-6 mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6>@group.Key</h6>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-secondary select-all">Chọn tất cả</button>
+                                <button type="button" class="btn btn-danger deselect-all">Hủy tất cả</button>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            @foreach (var function in group)
+                            {
+                                String functionID = function.FunctionID;
+                                var count = db.Authorizations.Count(m => m.UserCategoryID == Model.UserCategoryID && m.FunctionID == functionID);
+                                <li class="list-group-item">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" name="functionIDs" value="@functionID" @(count > 0 ? "checked" : "")>
+                                            @function.FunctionName
+                                        </label>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Cập nhật quyền hạn</button>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        // Xử lý sự kiện khi nhấn nút "Chọn tất cả"
+        $('.select-all').click(function () {
+            $(this).closest('.col-6').find('input[type="checkbox"]').prop('checked', true);
+        });
+
+        // Xử lý sự kiện khi nhấn nút "Hủy tất cả"
+        $('.deselect-all').click(function () {
+            $(this).closest('.col-6').find('input[type="checkbox"]').prop('checked', false);
+        });
+    </script>
+}
+
+
+

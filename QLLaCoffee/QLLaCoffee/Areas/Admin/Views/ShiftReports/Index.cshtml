@@ -1,0 +1,81 @@
+﻿@model QLLaCoffee.Models.ShiftReports
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var user = QLLaCoffee.App_Start.SessionConfig.GetUser();
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <p class="card-title">Báo cáo kết ca</p>
+            </div>
+            <div>
+                <div class="form-horizontal row">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Số bill</label>
+                            <div class="col-md-10">
+                                <div class="form-control">@Model.BillCount</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Đang phục vụ</label>
+                            <div class="col-md-10">
+                                <div class="form-control">@Model.UncollectedAmount.ToString("C0")</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Doanh thu</label>
+                            <div class="col-md-10">
+                                <div class="form-control">@Model.Revenue.ToString("C0")</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Số tiền đầu ca</label>
+                            <div class="col-md-10">
+                                <div class="form-control">@Model.FirstAmount.ToString("C0")</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Số tiền kết ca</label>
+                            <div class="col-md-10">
+                                <input class="form-control" name="lastAmount" type="number" />
+                                @if (ViewBag.Check == 1)
+                                {
+                                    <p class="mt-2" style="color: red">@ViewBag.Error</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Nhân viên</label>
+                            <div class="col-md-10">
+                                <div class="form-control">@user.FullName</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-labe col-md-12">Thời gian vào ca</label>
+                            <div class="col-md-10">
+                                <div class="form-control">@Model.FirstTime.ToString("g")</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-info btn-icon-text"><i class="ti-file btn-icon-prepend"></i>Kết ca</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+

@@ -1,0 +1,48 @@
+﻿@model QLLaCoffee.Models.GoodsCategories
+
+@{
+    ViewBag.Title = "Chỉnh sửa loại mặt hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <p class="card-title">Chỉnh sửa loại mặt hàng</p>
+                <a href="@Url.Action("Index", "GoodsCategories")" class="btn btn-primary">
+                    <i class="ti-arrow-left"></i>
+                </a>
+            </div>
+            <div class="table-responsive">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.GoodsCategoryID)
+
+                    <div class="form-group">
+                        <label class="control-labe col-md-12">Tên loại mặt hàng<span class="text-danger"> (*)</span></label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.GoodsCategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GoodsCategoryName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-labe col-md-12">Mô tả</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.GoodsCategoryDescription, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GoodsCategoryDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-info btn-icon-text"><i class="ti-file btn-icon-prepend"></i>Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

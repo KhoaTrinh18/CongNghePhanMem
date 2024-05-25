@@ -1,0 +1,49 @@
+﻿@model QLLaCoffee.Models.DrinkCategories
+
+@{
+    ViewBag.Title = "Chỉnh sửa loại đồ uống";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.DrinkCategoryID)
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <p class="card-title">Chỉnh sửa loại đồ uống</p>
+                <a href="@Url.Action("Index", "DrinkCategories")" class="btn btn-primary">
+                    <i class="ti-arrow-left"></i>
+                </a>
+            </div>
+            <div class="table-responsive">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-labe col-md-12">Tên loại đồ uống<span class="text-danger"> (*)</span></label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DrinkCategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DrinkCategoryName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-labe col-md-12">Mô tả</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DrinkCategoryDesciption, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DrinkCategoryDesciption, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-info btn-icon-text"><i class="ti-file btn-icon-prepend"></i>Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<QLLaCoffee.Models.BillInfos>
+
+<style>
+    h1, h2, p {
+        text-align: center;
+    }
+
+    .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        font-size: 16px;
+        line-height: 24px;
+        color: #555;
+    }
+
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+            .invoice-box table td {
+                padding: 5px;
+                vertical-align: top;
+            }
+
+            .invoice-box table tr td:nth-child(2) {
+                text-align: right;
+            }
+
+            .invoice-box table tr.top table td {
+                padding-bottom: 20px;
+            }
+
+            .invoice-box table tr.heading td {
+                background: #eee;
+                border-bottom: 1px solid #ddd;
+                font-weight: bold;
+            }
+
+            .invoice-box table tr.item td {
+                border-bottom: 1px solid #eee;
+            }
+
+            .invoice-box table tr.item.last td {
+                border-bottom: none;
+            }
+</style>
+<p style="font-size: 40px; font-weight: bold">Hóa đơn</p>
+<p style="font-size: 20px">LÁ COFFEE</p>
+<p>Địa chỉ: 39 Hồng Bàng, Nha Trang, Khánh Hòa</p>
+<p>Số điện thoại: 0368410685</p>
+<p>Mã hóa đơn: @Model.FirstOrDefault().BillID</p>
+<p>Ngày: @Model.FirstOrDefault().Bills.CreateDate.ToString("g")</p>
+@{ 
+    var user = QLLaCoffee.App_Start.SessionConfig.GetUser();
+}
+<p>Nhân viên: @user.FullName</p>
+<div class="invoice-box">
+    <table>
+        <tr class="heading">
+            <td>
+                Tên đồ uống
+            </td>
+            <td>
+                Số lượng
+            </td>
+            <td>
+                Giá
+            </td>
+            <td>
+                Thành tiền
+            </td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="item">
+                <td>
+                    @item.Drinks.DrinkName
+                </td>
+                <td>
+                    @item.DrinkCount
+                </td>
+                <td>
+                    @item.Drinks.DrinkPrice.ToString("C0")
+                </td>
+                <td>
+                    @item.DrinkPrice.ToString("C0")
+                </td>
+            </tr>
+        }
+        <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="font-size: 25px; padding-top: 20px">
+                Tổng cộng: @Model.Sum(x => x.DrinkCount * x.Drinks.DrinkPrice).ToString("C0")
+            </td>
+        </tr>
+    </table>
+</div>
+<p><i>Cảm ơn và hẹn gặp lại!</i></p>
