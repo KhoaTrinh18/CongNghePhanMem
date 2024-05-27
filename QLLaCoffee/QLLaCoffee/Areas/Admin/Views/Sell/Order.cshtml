@@ -59,9 +59,9 @@
 <div class="card p-3 h-100">
     <div class="row h-100">
         <div class="col-7">
-            <div class="d-flex justify-content-between mb-4">
+            <div class="d-flex justify-content-between">
                 <h2>@ViewBag.TableName</h2>
-                <a href="@Url.Action("Index", "Sell")" class="btn btn-primary"><i class="ti-arrow-left"></i></a>
+                <a href="@Url.Action("Index", "Sell")" class="btn btn-primary" style="height: fit-content"><i class="ti-arrow-left"></i></a>
             </div>
             <div class="row">
                 <div class="col-2">
@@ -69,7 +69,6 @@
                     {
                         <a href="#" data-category-id="@category.DrinkCategoryID" class="py-3 d-block text-center category-link">@category.DrinkCategoryName</a>
                     }
-
                 </div>
                 <div class="col-10 row" style="border-radius: 20px">
                     @foreach (var item in ViewBag.ListDrinks)
@@ -228,6 +227,7 @@
                     }
                 });
             });
+            $('.js-example-basic-single').select2();
         });
     </script>
 }

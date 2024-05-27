@@ -144,6 +144,7 @@
     <Compile Include="Areas\Admin\Controllers\GoodsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SellController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShiftReportsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -1972,6 +1973,10 @@
     <Content Include="Areas\Admin\Views\Authorizations\Authorize.cshtml" />
     <Content Include="Areas\Admin\Views\ShiftReports\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ShiftReports\BaoCaoKetCa.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKe\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKe\BaoCao.cshtml" />
+    <Content Include="Areas\Admin\Views\ShiftReports\DanhSach.cshtml" />
+    <Content Include="Areas\Admin\Views\ShiftReports\Details.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

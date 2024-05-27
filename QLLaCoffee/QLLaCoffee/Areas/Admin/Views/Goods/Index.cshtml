@@ -18,7 +18,7 @@
                 <a href="@Url.Action("Create", "Goods")" class="btn btn-success ml-2">
                     <i class="ti-plus"></i>
                 </a>
-            </div>         
+            </div>
         </div>
 
         @using (Html.BeginForm(FormMethod.Post))
@@ -40,17 +40,17 @@
                 </div>
                 <div class="col-6">
                     <div class="d-flex align-items-center row mb-2">
-                        <label class="col-3">Giá</label>
+                        <label class="col-3">Giá:</label>
                         <div class="col-9 d-flex p-0">
-                            <input class="form-control mr-2" type="number" placeholder="Giá thấp nhất" name="minPrice" value="@ViewBag.MinPrice"/>
-                            <input class="form-control" type="number" placeholder="Giá cao nhất" name="maxPrice" value="@ViewBag.MaxPrice"/>
+                            <input class="form-control mr-2" type="number" placeholder="Giá thấp nhất" name="minPrice" value="@ViewBag.MinPrice" />
+                            <input class="form-control" type="number" placeholder="Giá cao nhất" name="maxPrice" value="@ViewBag.MaxPrice" />
                         </div>
                     </div>
                     <div class="d-flex align-items-center row mb-2">
                         <label class="col-3">Số lượng:</label>
                         <div class="col-9 d-flex p-0">
-                            <input class="form-control mr-2" type="number" placeholder="Số lượng nhỏ nhất" name="minCount" value="@ViewBag.MinCount"/>
-                            <input class="form-control" type="number" placeholder="Số lượng lớn nhất" name="maxCount" value="@ViewBag.MaxCount"/>
+                            <input class="form-control mr-2" type="number" placeholder="Số lượng nhỏ nhất" name="minCount" value="@ViewBag.MinCount" />
+                            <input class="form-control" type="number" placeholder="Số lượng lớn nhất" name="maxCount" value="@ViewBag.MaxCount" />
                         </div>
                     </div>
                     <div class="row">
@@ -127,9 +127,19 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.GoodsUnit)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.GoodsCount)
-                            </td>
+                            @if (item.GoodsCount <= 5)
+                            {
+                                <td class="text-danger">
+                                    @Html.DisplayFor(modelItem => item.GoodsCount)
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GoodsCount)
+                                </td>
+                            }
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.GoodsPrice)
                             </td>
@@ -230,8 +240,8 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '/Goods/Delete', 
-                            type: 'POST', 
+                            url: '/Goods/Delete',
+                            type: 'POST',
                             data: { id: itemId },
                             success: function (rs) {
                                 if (rs.success) {

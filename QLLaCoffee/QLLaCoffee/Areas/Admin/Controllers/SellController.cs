@@ -56,9 +56,7 @@ namespace QLLaCoffee.Areas.Admin.Controllers
                 table.Status = false;
                 db.Entry(table).State = EntityState.Modified;
                 db.SaveChanges();
-                //return View(db.BillInfos.ToList());
-                return RedirectToAction("Index", "Drinks");
-
+                return View(db.BillInfos.ToList());
             }
         }
 
@@ -264,7 +262,7 @@ namespace QLLaCoffee.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [RoleUser(FunctionID = "BCKC")]
+        [RoleUser(FunctionID = "KC")]
         public ActionResult StartShift(decimal firstAmount)
         {
             ShiftReports shiftReports = new ShiftReports();

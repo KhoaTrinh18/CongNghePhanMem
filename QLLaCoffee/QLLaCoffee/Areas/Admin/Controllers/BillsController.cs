@@ -80,6 +80,7 @@ namespace QLLaCoffee.Areas.Admin.Controllers
             return View(bills.BillInfos.ToList());  
         }
 
+        [RoleUser(FunctionID = "HD_XemCT")]
         public ActionResult ExportPDF()
         {
             HtmlToPdf converter = new HtmlToPdf();

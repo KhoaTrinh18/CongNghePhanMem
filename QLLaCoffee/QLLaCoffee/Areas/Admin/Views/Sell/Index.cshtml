@@ -53,7 +53,6 @@
             </div>
         </div>
     </div>
-
 }
 
 @if (user.UserCategories.UserCategoryName == "Quản lý")
@@ -104,29 +103,28 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-            // Kiểm tra nếu cần hiển thị modal
             var urlParams = new URLSearchParams(window.location.search);
             var showAmountModal = urlParams.get('showAmountModal');
-            if (showAmountModal === "True") { // Sửa thành "true"
+            if (showAmountModal === "True") { 
                 $('#amountModal').modal('show');
             }
 
             $('#amountModal').on('hide.bs.modal', function (e) {
                 if (document.getElementById("firstAmount").classList.contains("is-invalid")) {
-                    e.preventDefault(); // Ngăn không cho đóng modal nếu có lỗi
+                    e.preventDefault(); 
                 }
             });
         });
 
         function submitAmount() {
             var amountStr = document.getElementById("firstAmount").value;
-            var amount = parseFloat(amountStr.replace(",", ".")); // Chuyển đổi giá trị sang decimal
+            var amount = parseFloat(amountStr.replace(",", ".")); 
             if (isNaN(amount) || amountStr.trim() === "" || amount <= 0) {
                 document.getElementById("firstAmount").classList.add("is-invalid");
             } else {
                 document.getElementById("firstAmount").classList.remove("is-invalid");
                 document.getElementById('amountForm').submit();
-                $('#amountModal').modal('hide'); // Ẩn modal sau khi xử lý
+                $('#amountModal').modal('hide'); 
             }
         }
 

@@ -13,6 +13,7 @@ namespace QLLaCoffee.Models
         public ShiftReports() { }
 
         [Key]
+        [Display(Name = "Mã báo cáo kết ca")]
         public String ShiftReportID { get; set; }
 
         [Display(Name = "Doanh thu")]

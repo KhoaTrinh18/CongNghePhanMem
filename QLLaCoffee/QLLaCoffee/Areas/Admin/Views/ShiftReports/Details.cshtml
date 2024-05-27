@@ -1,0 +1,50 @@
+﻿@model QLLaCoffee.Models.ShiftReports
+@{
+    ViewBag.Title = "Chi tiết báo cáo kết ca";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-2">
+            <p class="card-title">Chi tiết báo cáo kết ca</p>
+            <div>
+                <a class="btn btn-info mr-2" id="btnExportPDF" href="#">
+                    <i class="ti-printer"></i>
+                </a>
+                <a href="@Url.Action("DanhSach", "ShiftReports")" class="btn btn-primary">
+                    <i class="ti-arrow-left"></i>
+                </a>
+            </div>
+        </div>
+        <p style="text-align: center"><b>Mã báo cáo kết ca:</b> @Model.ShiftReportID</p>
+        <p style="text-align: center"><b>Nhân viên:</b> @Model.User.FullName</p>
+        <p style="text-align: center"><b>Giờ vào ca:</b> @Model.FirstTime.ToString("g")</p>
+        <p style="text-align: center"><b>Giờ kết ca:</b> @Model.LastTime.ToString("g")</p>
+        <p style="text-align: center"><b>Tống số hóa đơn:</b> @Model.BillCount</p>
+        <p style="text-align: center"><b>Đang phục vụ:</b> @Model.UncollectedAmount.ToString("C0")</p>
+        <p style="text-align: center"><b>Doanh thu:</b> @Model.Revenue.ToString("C0")</p>
+        <p style="text-align: center"><b>Số tiền đầu ca:</b> @Model.FirstAmount.ToString("C0")</p>
+        <p style="text-align: center"><b>Số tiền kết ca:</b> @Model.LastAmount.ToString("C0")</p>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#btnExportPDF').on('click', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/ShiftReports/ExportPDFCT',
+                    type: 'GET',
+                    success: function (rs) {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+
+

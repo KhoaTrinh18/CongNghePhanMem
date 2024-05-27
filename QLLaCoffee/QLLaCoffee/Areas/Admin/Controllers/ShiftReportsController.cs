@@ -14,11 +14,11 @@ using SelectPdf;
 
 namespace QLLaCoffee.Areas.Admin.Controllers
 {
-    [RoleUser(FunctionID = "BCKC")]
     public class ShiftReportsController : BaseController
     {
         private LaCoffeeDBContext db = new LaCoffeeDBContext();
 
+        [RoleUser(FunctionID = "KC")]
         // GET: Admin/ShiftReports
         public ActionResult Index()
         {
@@ -38,6 +38,7 @@ namespace QLLaCoffee.Areas.Admin.Controllers
             return View(shiftReports);
         }
 
+        [RoleUser(FunctionID = "KC")]
         [HttpPost]
         public ActionResult Index(decimal? lastAmount)
         {
@@ -59,6 +60,7 @@ namespace QLLaCoffee.Areas.Admin.Controllers
             return RedirectToAction("ExportPDF");
         }
 
+        [RoleUser(FunctionID = "KC")]
         public ActionResult ExportPDF()
         {
             HtmlToPdf converter = new HtmlToPdf();
@@ -76,6 +78,87 @@ namespace QLLaCoffee.Areas.Admin.Controllers
             doc.Save(pathFile);
             doc.Close();
             return RedirectToAction("Logout", "Login", new { area = ""});
+        }
+        [RoleUser(FunctionID = "BCKC_Xem")]
+        public ActionResult DanhSach()
+        {
+            return View(db.ShiftReports.ToList());
+        }
+
+        [HttpPost]
+        [RoleUser(FunctionID = "BCKC_Xem")]
+        public ActionResult DanhSach(DateTime? createDate)
+        {
+            if (createDate != null)
+            {
+                var result = (from item in db.ShiftReports
+                              where (item.LastTime.Day == createDate.Value.Day) &&
+                                    (item.LastTime.Month == createDate.Value.Month) &&
+                                    (item.LastTime.Year == createDate.Value.Year) 
+                              select item).ToList();
+                return View(result);
+            }
+            return RedirectToAction("DanhSach");
+        }
+
+        [HttpPost]
+        [RoleUser(FunctionID = "BCKC_Xoa")]
+        public ActionResult Delete(String id)
+        {
+            ShiftReports shiftReports = db.ShiftReports.Find(id);
+            db.ShiftReports.Remove(shiftReports);
+            db.SaveChanges();
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        [RoleUser(FunctionID = "BCKC_Xoa")]
+        public ActionResult DeleteAll(string ids)
+        {
+            if (!string.IsNullOrEmpty(ids))
+            {
+                var items = ids.Split(',');
+                if (items != null && items.Any())
+                {
+                    foreach (var item in items)
+                    {
+                        var o = db.ShiftReports.Find(item.ToString());
+                        db.ShiftReports.Remove(o);
+                        db.SaveChanges();
+                    }
+                }
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+
+        [RoleUser(FunctionID = "BCKC_XemCT")]
+        public ActionResult Details(String id)
+        {
+            TempData["ShiftReportID"] = id;
+            ShiftReports shiftReports = db.ShiftReports.Find(id);
+            return View(shiftReports);
+        }
+
+        [RoleUser(FunctionID = "BCKC_XemCT")]
+        public ActionResult ExportPDFCT()
+        {
+            HtmlToPdf converter = new HtmlToPdf();
+            converter.Options.PdfPageSize = PdfPageSize.A6;
+            converter.Options.PdfPageOrientation = PdfPageOrientation.Portrait;
+            converter.Options.MarginLeft = 10;
+            converter.Options.MarginRight = 10;
+            converter.Options.MarginTop = 20;
+            converter.Options.MarginBottom = 20;
+            String shiftReportID = TempData["ShiftReportID"] as String;
+            ShiftReports shiftReports = db.ShiftReports.Find(shiftReportID);
+            var htmlPDF = base.RenderPartialToString("~/Areas/Admin/Views/ShiftReports/BaoCaoKetCa.cshtml", shiftReports);
+            PdfDocument doc = converter.ConvertHtmlString(htmlPDF);
+            string fileName = string.Format("{0}.pdf", shiftReports.ShiftReportID);
+            string pathFile = Path.Combine(Server.MapPath("~/Public/PDF"), fileName);
+            doc.Save(pathFile);
+            doc.Close();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

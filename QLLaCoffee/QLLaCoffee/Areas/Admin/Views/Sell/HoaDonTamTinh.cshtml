@@ -25,7 +25,7 @@
                 vertical-align: top;
             }
 
-            .invoice-box table tr td:nth-child(2) {
+            .invoice-box table tr td:nth-child(3) {
                 text-align: right;
             }
 
@@ -47,12 +47,12 @@
                 border-bottom: none;
             }
 </style>
-<p style="font-size: 40px; font-weight: bold">Hóa đơn tạm tính</p>
+<p style="font-size: 40px; font-weight: bold">HÓA ĐƠN TẠM TÍNH</p>
 <p style="font-size: 20px">LÁ COFFEE</p>
 <p>Địa chỉ: 39 Hồng Bàng, Nha Trang, Khánh Hòa</p>
 <p>Số điện thoại: 0368410685</p>
-<p>Mã hóa đơn: @Model.FirstOrDefault().BillID</p>
 <p>Ngày: @Model.FirstOrDefault().Bills.CreateDate.ToString("g")</p>
+<p>Số bàn: @Model.FirstOrDefault().Bills.Tables.TableName</p>
 @{
     var user = QLLaCoffee.App_Start.SessionConfig.GetUser();
 }
@@ -95,6 +95,7 @@
             </tr>
         }
         <tr class="total">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

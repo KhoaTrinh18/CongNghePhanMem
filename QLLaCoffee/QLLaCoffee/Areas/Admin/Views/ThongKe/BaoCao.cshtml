@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QLLaCoffee.Models.BillInfos>
+﻿@model IEnumerable<QLLaCoffee.Models.Goods>
 @{ var count = 1;}
 <style>
     h1, h2, p {
@@ -25,7 +25,7 @@
                 vertical-align: top;
             }
 
-            .invoice-box table tr td:nth-child(3) {
+            .invoice-box table tr td:nth-child(5) {
                 text-align: right;
             }
 
@@ -47,13 +47,15 @@
                 border-bottom: none;
             }
 </style>
-<p style="font-size: 40px; font-weight: bold">HÓA ĐON</p>
-<p style="font-size: 20px">LÁ COFFEE</p>
+<p style="font-size: 40px; font-weight: bold">BÁO CÁO SẢN PHẨM SẮP HẾT</p>
+<p style="font-size: 20px;">LÁ COFFEE</p>
 <p>Địa chỉ: 39 Hồng Bàng, Nha Trang, Khánh Hòa</p>
 <p>Số điện thoại: 0368410685</p>
-<p>Mã hóa đơn: @Model.FirstOrDefault().BillID</p>
-<p>Ngày: @Model.FirstOrDefault().Bills.CreateDate.ToString("g")</p>
-<p>Nhân viên: @Model.FirstOrDefault().Bills.User.FullName</p>
+<p>Ngày: @DateTime.Now.ToString("g")</p>
+@{
+    var user = QLLaCoffee.App_Start.SessionConfig.GetUser();
+}
+<p>Nhân viên: @user.FullName</p>
 <div class="invoice-box">
     <table>
         <tr class="heading">
@@ -61,45 +63,44 @@
                 #
             </td>
             <td>
-                Tên đồ uống
+                Tên mặt hàng
+            </td>
+            <td>
+                Tên loại mặt hàng
+            </td>
+            <td>
+                Đơn vị
             </td>
             <td>
                 Số lượng
             </td>
             <td>
-                Giá
-            </td>
-            <td>
-                Thành tiền
+                Giá nhập
             </td>
         </tr>
         @foreach (var item in Model)
         {
             <tr class="item">
-                <td>@(count++)</td>
                 <td>
-                    @item.Drinks.DrinkName
+                    @(count++)
                 </td>
                 <td>
-                    @item.DrinkCount
+                    @item.GoodsName
                 </td>
                 <td>
-                    @item.Drinks.DrinkPrice.ToString("C0")
+                    @item.GoodsCategories.GoodsCategoryName
                 </td>
                 <td>
-                    @item.DrinkPrice.ToString("C0")
+                    @item.GoodsUnit
+                </td>
+                <td>
+                    @item.GoodsCount
+                </td>
+                <td>
+                    @item.GoodsPrice.ToString("C0")
                 </td>
             </tr>
         }
-        <tr class="total">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td style="font-size: 25px; padding-top: 20px">
-                Tổng cộng: @Model.Sum(x => x.DrinkCount * x.Drinks.DrinkPrice).ToString("C0")
-            </td>
-        </tr>
     </table>
 </div>
-<p><i>Cảm ơn và hẹn gặp lại!</i></p>
+

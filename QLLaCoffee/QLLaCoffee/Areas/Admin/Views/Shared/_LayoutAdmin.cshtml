@@ -96,7 +96,7 @@
                             </div>
                         </li>
                     }
-                    @if (user.UserCategories.UserCategoryName == "Quản lý" || user.UserCategories.UserCategoryName == "Quản lý kho")
+                    @if (user.UserCategories.UserCategoryName == "Quản lý kho")
                     {
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#mathang" aria-expanded="false" aria-controls="mathang">
@@ -125,7 +125,16 @@
                     {
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "ShiftReports")">
-                                <i class="mdi mdi-clipboard-text menu-icon"></i>
+                                <i class="mdi mdi-clipboard-arrow-left menu-icon"></i>
+                                <span class="menu-title">Kết ca</span>
+                            </a>
+                        </li>
+                    }
+                    @if (user.UserCategories.UserCategoryName == "Quản lý")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("DanhSach", "ShiftReports")">
+                                <i class="mdi mdi-bulletin-board menu-icon"></i>
                                 <span class="menu-title">Báo cáo kết ca</span>
                             </a>
                         </li>
@@ -149,6 +158,15 @@
                             <a class="nav-link" href="@Url.Action("Index", "Authorizations")">
                                 <i class="mdi mdi-shield menu-icon"></i>
                                 <span class="menu-title">Phân quyền</span>
+                            </a>
+                        </li>
+                    }
+                    @if (user.UserCategories.UserCategoryName == "Quản lý kho")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "ThongKe")">
+                                <i class="mdi mdi-chart-bar menu-icon"></i>
+                                <span class="menu-title">Thống kê</span>
                             </a>
                         </li>
                     }

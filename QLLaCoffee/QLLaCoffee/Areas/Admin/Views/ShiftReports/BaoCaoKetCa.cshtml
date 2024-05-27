@@ -1,11 +1,17 @@
 ﻿@model QLLaCoffee.Models.ShiftReports
 
-<p style="font-size: 40px; font-weight: bold; text-align:center">Báo cáo kết ca</p>
+<p style="font-size: 40px; font-weight: bold; text-align:center">BÁO CÁO KẾT CA</p>
 <p style="font-size: 20px; text-align: center">LÁ COFFEE</p>
-@{
-    var user = QLLaCoffee.App_Start.SessionConfig.GetUser();
+<p style="text-align: center">Mã báo cáo kết ca: @Model.ShiftReportID</p>
+@if (Model.User != null)
+{
+    <p style="text-align: center">Nhân viên: @Model.User.FullName</p>
 }
-<p style="text-align: center">Nhân viên: @user.FullName</p>
+else
+{
+    var user = QLLaCoffee.App_Start.SessionConfig.GetUser();
+    <p style="text-align: center">Nhân viên: @user.FullName</p>
+}
 <div style="display: flex; justify-content: center">
     <div style="width:50%">
         <div style="display: flex; justify-content: space-around;">
@@ -20,7 +26,7 @@
                 <p>Số tiền đầu ca: @Model.FirstAmount.ToString("C0")</p>
                 <p>Số tiền kết ca: @Model.LastAmount.ToString("C0")</p>
             </div>
-        </div>        
+        </div>
         <div style="display: flex; justify-content: space-around;">
             <p>Nhân viên giao ca</p>
             <p>Nhân viên nhận ca</p>
