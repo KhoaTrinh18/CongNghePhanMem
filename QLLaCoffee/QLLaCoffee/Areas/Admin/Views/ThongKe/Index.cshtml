@@ -32,7 +32,6 @@
                     <th style="vertical-align: middle;">
                         @Html.DisplayNameFor(model => model.GoodsPrice)
                     </th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -62,14 +61,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.GoodsPrice)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Edit", "Goods", new { id = item.GoodsID })" style="text-decoration: none; margin-right: 20px">
-                                    <i class="mdi mdi-pencil" style="font-size: 25px; color: dodgerblue;"></i>
-                                </a>
-                                <a href="#" class="btnDelete" style="text-decoration: none">
-                                    <i class="mdi mdi-delete" style="font-size: 25px; color: red"></i>
-                                </a>
                             </td>
                         </tr>
                     }

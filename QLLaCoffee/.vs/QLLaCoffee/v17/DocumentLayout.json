@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|d:\\hoctap\\congnghephanmem\\qllacoffee\\qllacoffee\\migrations\\202405250757269_name.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|solutionrelative:qllacoffee\\migrations\\202405250757269_name.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|d:\\hoctap\\congnghephanmem\\qllacoffee\\qllacoffee\\areas\\admin\\controllers\\shiftreportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|solutionrelative:qllacoffee\\areas\\admin\\controllers\\shiftreportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|d:\\hoctap\\congnghephanmem\\qllacoffee\\qllacoffee\\migrations\\configuration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|solutionrelative:qllacoffee\\migrations\\configuration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|d:\\hoctap\\congnghephanmem\\qllacoffee\\qllacoffee\\areas\\admin\\controllers\\thongkecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|solutionrelative:qllacoffee\\areas\\admin\\controllers\\thongkecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|d:\\hoctap\\congnghephanmem\\qllacoffee\\qllacoffee\\areas\\admin\\controllers\\billscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|solutionrelative:qllacoffee\\areas\\admin\\controllers\\billscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|d:\\hoctap\\congnghephanmem\\qllacoffee\\qllacoffee\\areas\\admin\\controllers\\goodscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|solutionrelative:qllacoffee\\areas\\admin\\controllers\\goodscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|d:\\hoctap\\congnghephanmem\\qllacoffee\\qllacoffee\\areas\\admin\\controllers\\goodscategoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|solutionrelative:qllacoffee\\areas\\admin\\controllers\\goodscategoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|d:\\hoctap\\congnghephanmem\\qllacoffee\\qllacoffee\\areas\\admin\\controllers\\sellcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|solutionrelative:qllacoffee\\areas\\admin\\controllers\\sellcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|d:\\hoctap\\congnghephanmem\\qllacoffee\\qllacoffee\\areas\\admin\\views\\bills\\hoadon.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83901043-264E-48BD-886B-DCAC61EF4679}|QLLaCoffee\\QLLaCoffee.csproj|solutionrelative:qllacoffee\\areas\\admin\\views\\bills\\hoadon.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +38,97 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Configuration.cs",
-              "DocumentMoniker": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Migrations\\Configuration.cs",
-              "RelativeDocumentMoniker": "QLLaCoffee\\Migrations\\Configuration.cs",
-              "ToolTip": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Migrations\\Configuration.cs",
-              "RelativeToolTip": "QLLaCoffee\\Migrations\\Configuration.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "ShiftReportsController.cs",
+              "DocumentMoniker": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\ShiftReportsController.cs",
+              "RelativeDocumentMoniker": "QLLaCoffee\\Areas\\Admin\\Controllers\\ShiftReportsController.cs",
+              "ToolTip": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\ShiftReportsController.cs",
+              "RelativeToolTip": "QLLaCoffee\\Areas\\Admin\\Controllers\\ShiftReportsController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAH0AAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T03:31:13.404Z",
+              "WhenOpened": "2024-06-01T03:38:42.818Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "202405250757269_name.cs",
-              "DocumentMoniker": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Migrations\\202405250757269_name.cs",
-              "RelativeDocumentMoniker": "QLLaCoffee\\Migrations\\202405250757269_name.cs",
-              "ToolTip": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Migrations\\202405250757269_name.cs",
-              "RelativeToolTip": "QLLaCoffee\\Migrations\\202405250757269_name.cs",
+              "DocumentIndex": 5,
+              "Title": "SellController.cs",
+              "DocumentMoniker": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\SellController.cs",
+              "RelativeDocumentMoniker": "QLLaCoffee\\Areas\\Admin\\Controllers\\SellController.cs",
+              "ToolTip": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\SellController.cs",
+              "RelativeToolTip": "QLLaCoffee\\Areas\\Admin\\Controllers\\SellController.cs",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T03:38:19.893Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GoodsController.cs",
+              "DocumentMoniker": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\GoodsController.cs",
+              "RelativeDocumentMoniker": "QLLaCoffee\\Areas\\Admin\\Controllers\\GoodsController.cs",
+              "ToolTip": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\GoodsController.cs",
+              "RelativeToolTip": "QLLaCoffee\\Areas\\Admin\\Controllers\\GoodsController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T03:31:12.395Z",
+              "WhenOpened": "2024-06-01T03:37:43.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GoodsCategoriesController.cs",
+              "DocumentMoniker": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\GoodsCategoriesController.cs",
+              "RelativeDocumentMoniker": "QLLaCoffee\\Areas\\Admin\\Controllers\\GoodsCategoriesController.cs",
+              "ToolTip": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\GoodsCategoriesController.cs",
+              "RelativeToolTip": "QLLaCoffee\\Areas\\Admin\\Controllers\\GoodsCategoriesController.cs",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAswAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T03:37:36.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ThongKeController.cs",
+              "DocumentMoniker": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\ThongKeController.cs",
+              "RelativeDocumentMoniker": "QLLaCoffee\\Areas\\Admin\\Controllers\\ThongKeController.cs",
+              "ToolTip": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\ThongKeController.cs",
+              "RelativeToolTip": "QLLaCoffee\\Areas\\Admin\\Controllers\\ThongKeController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T03:37:17.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BillsController.cs",
+              "DocumentMoniker": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\BillsController.cs",
+              "RelativeDocumentMoniker": "QLLaCoffee\\Areas\\Admin\\Controllers\\BillsController.cs",
+              "ToolTip": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Controllers\\BillsController.cs",
+              "RelativeToolTip": "QLLaCoffee\\Areas\\Admin\\Controllers\\BillsController.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T03:31:17.809Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HoaDon.cshtml",
+              "DocumentMoniker": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Views\\Bills\\HoaDon.cshtml",
+              "RelativeDocumentMoniker": "QLLaCoffee\\Areas\\Admin\\Views\\Bills\\HoaDon.cshtml",
+              "ToolTip": "D:\\Hoctap\\CongNghePhanMem\\QLLaCoffee\\QLLaCoffee\\Areas\\Admin\\Views\\Bills\\HoaDon.cshtml",
+              "RelativeToolTip": "QLLaCoffee\\Areas\\Admin\\Views\\Bills\\HoaDon.cshtml",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAADEAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-01T03:22:24.035Z",
               "EditorCaption": ""
             }
           ]
