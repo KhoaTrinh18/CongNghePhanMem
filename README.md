@@ -1,2 +1,2 @@
 # CongNghePhanMem
-Lưu các bài tập môn công nghệ phần mềm 
+Bài tập lớn cuối kì của học phần Công nghệ phần mềm
